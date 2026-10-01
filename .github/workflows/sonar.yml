@@ -1,4 +1,4 @@
-name: SonarQube Analysis
+name: SonarCloud Analysis
 
 on:
   push:
@@ -11,14 +11,14 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  sonarqube:
-    name: Analisar código com SonarQube
+  sonarcloud:
+    name: Analisar código com SonarCloud
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do repositório
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  
+          fetch-depth: 0
 
       - name: Configurar Node.js
         uses: actions/setup-node@v4
@@ -29,10 +29,7 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
-      - name: Executar SonarQube Scan
+      - name: Executar SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v4
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          
-          
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
